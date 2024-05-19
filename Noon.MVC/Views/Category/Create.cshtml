@@ -1,0 +1,618 @@
+﻿@model AliExpress.Dtos.Category.CategoryDto
+@using Microsoft.Extensions.Localization
+@using Noon.MVC.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@using System.Globalization
+@inject IViewLocalizer _localizer
+@{
+    ViewData["Title"] = "Create CATEGORY";
+    Layout = "_navbarLayout";
+    var lan = "";
+    var direction = "";
+    var sessionData = Context.Session.GetString("Culture");
+    var culture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+    if (!string.IsNullOrEmpty(sessionData))
+    {
+        if (sessionData.StartsWith("ar"))
+        {
+            lan = "ar";
+            direction = "rtl";
+        }
+        else
+        {
+            lan = "en";
+            direction = "ltr";
+        }
+    }
+}
+
+<h1>@_localizer["Create"]</h1>
+
+
+<hr />
+<div>
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Name_Ar" class="control-label"></label>
+            <input asp-for="Name_Ar" class="form-control" />
+            <span asp-validation-for="Name_Ar" class="text-danger"></span>
+        </div>
+        <label>@_localizer["Select"]</label><br />
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="Functionality"
+                           name="Specification"
+                           value="Functionality" />
+                    <label for="Functionality"> @_localizer["Functionality"]</label><br />
+                    
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="Compatibility"
+                           name="Specification"
+                           value="Compatibility" />
+                    <label for="Compatibility"> @_localizer["Compatibility"]</label><br />
+                    
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="Language"
+                           name="Specification"
+                           value="Language" />
+                    <label for="Language"> @_localizer["Language"]</label><br />
+                   
+                </div>
+                <div class="col-sm">
+                   
+                    <input type="checkbox" id="Type" name="Specification" value="Type" />
+                    <label for="Type"> @_localizer["Type"]</label><br />
+                 
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="ShippingMethod"
+                           name="Specification"
+                           value="ShippingMethod" />
+                    <label for="ShippingMethod"> @_localizer["ShippingMethod"]</label><br />
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="PlaceOfOrigin"
+                           name="Specification"
+                           value="PlaceOfOrigin" />
+                    <label for="PlaceOfOrigin"> @_localizer["PlaceOfOrigin"]</label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="ModelNumber"
+                           name="Specification"
+                           value="ModelNumber" />
+                    <label for="ModelNumber"> @_localizer["ModelNumber"]</label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="LensWidth"
+                           name="Specification"
+                           value="LensWidth" />
+                    <label for="LensWidth"> @_localizer["LensWidth"]</label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="LensHeight"
+                           name="Specification"
+                           value="LensHeight" />
+                    <label for="LensHeight"> @_localizer["LensHeight"]</label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="LensMaterial"
+                           name="Specification"
+                           value="LensMaterial" />
+                    <label for="LensMaterial"> @_localizer["LensMaterial"]</label><br />
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="Department"
+                           name="Specification"
+                           value="Department" />
+                    <label for="Department"> @_localizer["Department"]</label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="Gender"
+                           name="Specification"
+                           value="Gender" />
+                    <label for="Gender"> @_localizer["Gender"]</label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="FrameMaterial"
+                           name="Specification"
+                           value="FrameMaterial" />
+                    <label for="FrameMaterial"> @_localizer["Frame Material"]</label><br />
+                </div>
+
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="LensFeatures"
+                           name="Specification"
+                           value="LensFeatures" />
+                    <label for="LensFeatures"> @_localizer["Lens Features"]</label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="Style"
+                           name="Specification"
+                           value="Style" />
+                    <label for="Style"> @_localizer["Style"]</label><br />
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <input type="checkbox"
+                               id="BrandName"
+                               name="Specification"
+                               value="BrandName" />
+                        <label for="BrandName"> @_localizer["Brand Name"]</label><br />
+                    </div>
+                    <div class="col-sm">
+                        <input type="checkbox"
+                               id="Certification"
+                               name="Specification"
+                               value="Certification" />
+                        <label for="Certification"> @_localizer["Certification"]</label><br />
+                    </div>
+                    <div class="col-sm">
+                        <input type="checkbox"
+                               id="ItemType"
+                               name="Specification"
+                               value="ItemType" />
+                        <label for="ItemType"> @_localizer["Item Type"]</label><br />
+                    </div>
+                    <div class="col-sm">
+                        <input type="checkbox"
+                               id="Origin"
+                               name="Specification"
+                               value="Origin" />
+                        <label for="Origin"> @_localizer["Origin"]</label><br />
+                    </div>
+                    <div class="col-sm">
+                        <input type="checkbox"
+                               id="EyewearType"
+                               name="Specification"
+                               value="EyewearType" />
+                        <label for="EyewearType"> @_localizer["Eyewear Type"]</label><br />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="FrameColor"
+                           name="Specification"
+                           value="FrameColor" />
+                    <label for="FrameColor"> @_localizer["Frame Color"]</label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="LensColor"
+                           name="Specification"
+                           value="LensColor" />
+                    <label for="LensColor"> @_localizer["Lens Color"]</label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="LensAttributes"
+                           name="Specification"
+                           value="LensAttributes" />
+                    <label for="LensAttributes"> @_localizer["Lens Attributes"]</label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="UsageScope"
+                           name="Specification"
+                           value="UsageScope" />
+                    <label for="UsageScope"> @_localizer["Usage Scope"]</label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="SuitableFaceShapes"
+                           name="Specification"
+                           value="SuitableFaceShapes" />
+                    <label for="SuitableFaceShapes">@_localizer["Suitable Face Shapes"] </label><br />
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="SunglassesStyle"
+                           name="Specification"
+                           value="SunglassesStyle" />
+                    <label for="SunglassesStyle"> @_localizer["Sunglasses Style"]</label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="CompanyHistory"
+                           name="Specification"
+                           value="CompanyHistory" />
+                    <label for="CompanyHistory"> @_localizer["Company History"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="Brand"
+                           name="Specification"
+                           value="Brand" />
+                    <label for="Brand"> @_localizer["Brand"]</label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="CommunicationType"
+                           name="Specification"
+                           value="CommunicationType" />
+                    <label for="CommunicationType">@_localizer["Communication Type"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="SetType"
+                           name="Specification"
+                           value="SetType" />
+                    <label for="SetType"> @_localizer["Set Type"]</label><br />
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="Transmitter"
+                           name="Specification"
+                           value="Transmitter" />
+                    <label for="Transmitter"> @_localizer["Transmitter"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox" id="Use" name="Specification" value="Use" />
+                    <label for="Use"> @_localizer["Use"]</label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="ChargingTime"
+                           name="Specification"
+                           value="ChargingTime" />
+                    <label for="ChargingTime">@_localizer["Charging Time"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="WorkingHours"
+                           name="Specification"
+                           value="WorkingHours" />
+                    <label for="WorkingHours">@_localizer["Working Hours"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="TransmissionDistance"
+                           name="Specification"
+                           value="TransmissionDistance" />
+                    <label for="TransmissionDistance">@_localizer["Transmission Distance"]</label><br />
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="Features"
+                           name="Specification"
+                           value="Features" />
+                    <label for="Features">@_localizer["Features"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="Accessories"
+                           name="Specification"
+                           value="Accessories" />
+                    <label for="Accessories">@_localizer["Accessories"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="BandLength"
+                           name="Specification"
+                           value="BandLength" />
+                    <label for="BandLength"> @_localizer["Band Length"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="BandWidth"
+                           name="Specification"
+                           value="BandWidth" />
+                    <label for="BandWidth">@_localizer["Band Width"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="Weight"
+                           name="Specification"
+                           value="Weight" />
+                    <label for="Weight">@_localizer["Weight"] </label><br />
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="BuiltInVoiceAssistant"
+                           name="Specification"
+                           value="BuiltInVoiceAssistant" />
+                    <label for="BuiltInVoiceAssistant">@_localizer["Built-In Voice Assistant"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="BluetoothVersion"
+                           name="Specification"
+                           value="BluetoothVersion" />
+                    <label for="BluetoothVersion"> @_localizer["Bluetooth Version"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox" id="WiFi" name="Specification" value="WiFi" />
+                    <label for="WiFi"> @_localizer["WiFi"]</label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="SimCardSlot"
+                           name="Specification"
+                           value="SimCardSlot" />
+                    <label for="SimCardSlot">@_localizer["Sim Card Slot"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="MeasurementScales"
+                           name="Specification"
+                           value="MeasurementScales" />
+                    <label for="MeasurementScales">@_localizer["Measurement Scales"] </label><br />
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="ActivityTracking"
+                           name="Specification"
+                           value="ActivityTracking" />
+                    <label for="ActivityTracking">@_localizer["Activity Tracking"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="Touchscreen"
+                           name="Specification"
+                           value="Touchscreen" />
+                    <label for="Touchscreen"> @_localizer["Touchscreen"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="AppName"
+                           name="Specification"
+                           value="AppName" />
+                    <label for="AppName"> @_localizer["App Name"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="ScreenMaterial"
+                           name="Specification"
+                           value="ScreenMaterial" />
+                    <label for="ScreenMaterial"> @_localizer["Screen Material"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="CPUModel"
+                           name="Specification"
+                           value="CPUModel" />
+                    <label for="CPUModel"> @_localizer["CPU Model"] </label><br />
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="Detachable"
+                           name="Specification"
+                           value="Detachable" />
+                    <label for="Detachable"> @_localizer["Detachable"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="AppDownloadAvailable"
+                           name="Specification"
+                           value="AppDownloadAvailable" />
+                    <label for="AppDownloadAvailable"> @_localizer["App Download Available"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="RemovableBattery"
+                           name="Specification"
+                           value="RemovableBattery" />
+                    <label for="RemovableBattery"> @_localizer["Removable Battery"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="CPUManufacturer"
+                           name="Specification"
+                           value="CPUManufacturer" />
+                    <label for="CPUManufacturer">@_localizer["CPU Manufacturer"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="Resolution"
+                           name="Specification"
+                           value="Resolution" />
+                    <label for="Resolution"> @_localizer["Resolution"] </label><br />
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="ScreenSize"
+                           name="Specification"
+                           value="ScreenSize" />
+                    <label for="ScreenSize"> @_localizer["Screen Size"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="MovementType"
+                           name="Specification"
+                           value="MovementType" />
+                    <label for="MovementType"> @_localizer["Movement Type"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="AgeCategoryApp"
+                           name="Specification"
+                           value="AgeCategoryApp" />
+                    <label for="AgeCategoryApp"> @_localizer["Age Category App"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="ScreenShape"
+                           name="Specification"
+                           value="ScreenShape" />
+                    <label for="ScreenShape"> @_localizer["Screen Shape"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="CaseMaterial"
+                           name="Specification"
+                           value="CaseMaterial" />
+                    <label for="CaseMaterial">  @_localizer["Case Material"]</label><br />
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="AvailableSimCard"
+                           name="Specification"
+                           value="AvailableSimCard" />
+                    <label for="AvailableSimCard"> @_localizer["Available Sim Card"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="Mechanism"
+                           name="Specification"
+                           value="Mechanism" />
+                    <label for="Mechanism">@_localizer["Mechanism"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="MultiFace"
+                           name="Specification"
+                           value="MultiFace" />
+                    <label for="MultiFace"> @_localizer["Multi Face"] </label><br />
+                </div>
+
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="StrapMaterial"
+                           name="Specification"
+                           value="StrapMaterial" />
+                    <label for="StrapMaterial"> @_localizer["Strap Material"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="WaterproofRating"
+                           name="Specification"
+                           value="WaterproofRating" />
+                    <label for="WaterproofRating"> @_localizer["Waterproof Rating"] </label><br />
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="RearCamera"
+                           name="Specification"
+                           value="RearCamera" />
+                    <label for="RearCamera">  @_localizer["Rear Camera"]</label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox" id="RAM" name="Specification" value="RAM" />
+                    <label for="RAM"> @_localizer["RAM"]</label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox" id="GPS" name="Specification" value="GPS" />
+                    <label for="GPS"> @_localizer["GPS"]</label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="NetworkMode"
+                           name="Specification"
+                           value="NetworkMode" />
+                    <label for="NetworkMode">@_localizer["Network Mode"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="BatteryCapacity"
+                           name="Specification"
+                           value="BatteryCapacity" />
+                    <label for="BatteryCapacity"> @_localizer["Battery Capacity"] </label><br />
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <input type="checkbox" id="ROM" name="Specification" value="ROM" />
+                    <label for="ROM">@_localizer["ROM"] </label><br />
+                </div>
+                <div class="col-sm">
+                    <input type="checkbox"
+                           id="System"
+                           name="Specification"
+                           value="System" />
+                    <label for="System"> @_localizer["System"] </label><br />
+                </div>
+                </div>  
+            </div>
+        
+<button type="submit" class="btn btn-primary">@_localizer["Create"]</button>
+    </form>
+</div>
+
+<div>
+    <a asp-action="Index">@_localizer["Back"]</a>
+</div>
+@section Scripts {
+    @{
+        await
+    Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

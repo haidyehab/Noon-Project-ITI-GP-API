@@ -1,0 +1,116 @@
+﻿@model IEnumerable<AliExpress.Dtos.Category.CategoryDto>
+@using Microsoft.Extensions.Localization
+@using Noon.MVC.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@using System.Globalization
+@inject IViewLocalizer _localizer
+
+@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "CATEGORY";
+   Layout = "_navbarLayout";
+    var lan = "";
+    var direction = "";
+    var sessionData = Context.Session.GetString("Culture");
+    var culture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+    if (!string.IsNullOrEmpty(sessionData))
+    {
+        if (sessionData.StartsWith("ar"))
+        {
+            lan = "ar";
+            direction = "rtl";
+        }
+        else
+        {
+            lan = "en";
+            direction = "ltr";
+        }
+    }
+}
+
+<h1>@_localizer["CATEGORY"]</h1>
+
+<p>
+    <a asp-action="Create">@_localizer["Create"]</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @_localizer["id"]
+               
+            </th>
+            <th>
+                @_localizer["name"]
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(Model !=null)
+        {
+
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                        @{
+                            if (!string.IsNullOrEmpty(sessionData))
+                            {
+                                if (sessionData.StartsWith("en"))
+                                {
+                                    // Display English properties
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                
+                                }
+                                else if (sessionData.StartsWith("ar"))
+                                {
+                                    // Display Arabic properties
+                                     @Html.DisplayFor(modelItem => item.Name_Ar)
+                                
+                                }
+                                else
+                                {
+                                    // Default to English if the language is not specified or supported
+                                    @Html.DisplayFor(modelItem => item.Name)
+                               
+                                }
+                            }
+                            else
+                            {
+                                // Default to English if culture parameter is not provided in the query string
+                                    @Html.DisplayFor(modelItem => item.Name)
+                            }
+                        }
+               
+            </td>
+            <td>
+                        @{
+                            var editLocalized = _localizer["Edit"];
+                        }
+
+                        @Html.ActionLink(editLocalized.Value, "Edit", new { id = item.Id })
+                     @*    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) | *@
+                       @*  @Html.ActionLink("Deactivate", "SfotDelete", new { id = item.Id }, new { @class = "btn btn-warning" }) *@
+                        <a href="#" class="btn btn-danger deactivate-btn" data-id="@item.Id">@_localizer["Deactivate"]</a>
+            </td>
+        </tr>
+}
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.deactivate-btn').click(function (e) {
+                e.preventDefault();
+                var categoryId = $(this).data('id');
+                if (confirm('Are you sure you want to deactivate this category?')) {
+                    window.location.href = '@Url.Action("SfotDelete", "Category")/' + categoryId;
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,123 @@
+﻿
+@model IEnumerable<OrderReturnDto>
+@using Microsoft.Extensions.Localization
+@using Noon.MVC.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@using System.Globalization
+@inject IViewLocalizer _localizer
+@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_navbarLayout";
+    var lan = "";
+    var direction = "";
+    var sessionData = Context.Session.GetString("Culture");
+    var culture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+    if (!string.IsNullOrEmpty(sessionData))
+    {
+        if (sessionData.StartsWith("en"))
+        {
+            lan = "ar";
+            direction = "rtl";
+        }
+        else
+        {
+            lan = "en";
+            direction = "ltr";
+        }
+    }
+}
+
+@if(Model.Count() > 0)
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @_localizer["Id"]
+                   
+                </th>
+                <th>
+                    @_localizer["OrderDate"]
+                    
+                <th>
+                    @_localizer["UserPhone"]
+                    
+                </th>
+                <th>
+                    @_localizer["UserCountry"]
+                   
+                </th>
+                <th>
+                    @_localizer["UserCity"]
+                    
+                </th>
+                <th>
+                    @_localizer["DeliveryMethod"]
+                    
+                </th>
+                <th>
+                    @_localizer["Status"]
+                   
+                </th>
+               <th>
+                    @_localizer["Total"]
+           
+            </th>
+                <th>@_localizer["Actions"]</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @{
+                                string formattedOrderDate = item.OrderDate.ToString("M/d/yyyy");
+                            }
+
+                            @Html.DisplayFor(modelItem => formattedOrderDate)
+                           @*  @Html.DisplayFor(modelItem => item.OrderDate.ToString("M/d/yyyy")) *@
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AppUser.Phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AppUser.Country)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AppUser.City)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DeliveryMethod)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Total)
+                        </td>
+                        <td>
+
+                            <a class="btn btn-primary" asp-controller="Order" asp-action="Edit" asp-route-id="@item.Id">@_localizer["Edit"]</a>
+                        </td>
+                        <td>
+                           
+                            @* <a class="btn btn-secondary" asp-controller="Order" asp-action="Details" asp-route-id="@item.Id">Details</a> *@
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table> 
+}
+else
+{
+    <div class="alert alert-danger"><p>No orders</p></div>
+}
+
